@@ -103,4 +103,7 @@ The project explored predicting stock price movements using news sentiment analy
 
 #### Outline of project
 
-- [Link to notebook 1](https://github.com/krupakmurthy/final_capstone/blob/main/capstone.ipynb)
+- [Link to notebook for modelling](https://github.com/krupakmurthy/final_capstone/blob/main/capstone.ipynb)
+- [Link to notebook to retrieve dataset](https://github.com/krupakmurthy/final_capstone/blob/main/dataset.ipynb)
+- [Link to dataset related to stock](https://github.com/krupakmurthy/final_capstone/tree/main/stockdataset)
+- [Link to dataset related to news](https://github.com/krupakmurthy/final_capstone/tree/main/newsdataset)
