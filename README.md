@@ -4,7 +4,7 @@
 Nandini Krupa Krishnamurthy
 
 #### Executive summary
-This analysis explores the relationship between news sentiment and stock market movements for Dow Jones, NASDAQ, and S&P 500 from October 1, 2024, to January 31, 2025. We performed exploratory data analysis (EDA), sentiment analysis, and machine learning modeling to understand how media coverage influences stock prices and volatility.
+This analysis explores the relationship between news sentiment and stock market movements for Dow Jones, NASDAQ, S&P 500, Bitcoin and Dogecoin from October 1, 2024, to February 28, 2025. We performed exploratory data analysis (EDA), sentiment analysis, and machine learning modeling to understand how media coverage influences stock prices and volatility.
 
 #### Rationale
 Why should anyone care about this question?
@@ -22,19 +22,24 @@ Can sentiment analysis of news articles predict stock price changes?
 What data will you use to answer you question?
 
 To analyze the impact of news sentiment on stock market movements, we used two key datasets for timeframe: October 1, 2024 - January 31, 2025
-- Stock Market Data (NASDAQ, Dow Jones, S&P 500) YahooFinance: https://pypi.org/project/yfinance/
+- Stock Market Data (NASDAQ, Dow Jones, S&P 500, Bitcoin and Dogecoin) YahooFinance: https://pypi.org/project/yfinance/
 - News Sentiment Data: GDELT: https://github.com/alex9smith/gdelt-doc-api
 
 #### Methodology
 What methods are you using to answer the question?
 
-To understand how news sentiment impacts stock market movements, I followed a structured approach
+To understand how news sentiment impacts stock market movements, I followed a structured approach:
 - Data Collection & Preprocessing
-  - Merged stock market data (NASDAQ, Dow Jones, S&P 500) with news sentiment data from October 2024 to January 2025.
-  - Cleaned and formatted the data (handled missing values, converted timestamps, standardized columns).
+  - Merged stock market data (NASDAQ, Dow Jones, S&P 500, Bitcoin, and Dogecoin) with news sentiment data from October 2024 to February 2025.
+  - Cleaned and formatted the data by handling missing values, converting timestamps, and standardizing columns.
+
+- Feature Engineering
+  - Scaled, encoded categorical variables, and created new features for analysis.
+  - Applied MinMax Scaling, Standardization, and One-Hot Encoding.
+  - Created lagged sentiment features to account for delayed market reactions.
 
 - Exploratory Data Analysis (EDA)
-  - Sentiment Distribution: Checked whether news was mostly positive, negative, or neutral.
+  - Sentiment Distribution: Analyzed whether news was mostly positive, negative, or neutral.
   - Trend Analysis: Visualized sentiment fluctuations over time alongside stock price movements.
   - Volatility Analysis: Examined how sentiment shifts impact stock market volatility and returns.
 
@@ -42,24 +47,55 @@ To understand how news sentiment impacts stock market movements, I followed a st
   - Built a Random Forest Classifier to predict whether a stock’s price would rise or fall based on:
     - Sentiment Scores
     - News Volume
-    - Stock Market Features
-  - Evaluated model accuracy and feature importance to identify key drivers.
+    - Stock Market Features (e.g., price changes, moving averages)
+  - Evaluated model accuracy and feature importance to identify key drivers of market movements.
+  
+- Modeling
+  The following models were implemented to compare performance:
+  - Support Vector Classifier (SVC): Since this is effective for classification problems with complex decision boundaries (the dataset has a feature called stock_movement).
+  - Random Forest Classifier (RFC): This is robust to overfitting and useful for feature importance analysis.
+  - XGBoost: Gradient boosting algorithm that enhances model performance with better regularization.
+  - ARIMA: Applied for time series forecasting.
+
+- Why These Models?
+  - Each model was selected based on its ability to handle the data structure and improve predictions:
+  - mSVC and RFC for classification tasks.
+  - XGBoost (without and with lag) for better generalization.
+  - ARIMA for time-dependent forecasting.
+
+- Model Evaluation
+  - Evaluation Metrics: Accuracy, Mean Squared Error (MSE), Mean Absolute Error (MAE), R² Score.
+  - Cross-Validation: Applied k-fold cross-validation where applicable.
+  - Grid Search Hyperparameter Tuning: Optimized model parameters to improve accuracy.
 
 #### Results
 What did your research find?
-Results from the baseline model:
-- Model Accuracy - The baseline model achieved 51% accuracy, which is only slightly better than random guessing, suggesting that news sentiment alone is not enough to predict stock price direction.
+
+Results from models:
+- Different models performed differently. Of all the models in this notebook - SVC, RFC, XGBoost, XGBoost with lag, ARIMA, XGBoost (both with and without lag) performed the best for the dataset I have, with a R2 score averaging around 0.9 for all stocks.
+
+- Dataset - One key consideration in this analysis is the inclusion of multiple stocks in the dataset. While analyzing a diverse set of stocks can provide a broad perspective, it may introduce noise and inconsistencies. A more focused approach, such as analyzing a single major market mover like NASDAQ, could provide clearer insights into how sentiment impacts stock price movements. By narrowing the scope to a specific index, the model could achieve greater precision in detecting sentiment-driven patterns.
 
 - Feature Importance - Volatility was the strongest predictor, while sentiment score and news volume had a smaller impact, meaning that market conditions drive stock changes more than media sentiment.
 
 - Sentiment Trends - News sentiment fluctuated, but it did not always align directly with stock price changes, indicating that other factors (economic events, earnings reports) may overshadow sentiment effects.
 
+### Key takeaways
+
+- The best model (XGBoost) achieved high R2 score (0.9 on an avg for each stock), suggesting that machine learning can partially predict stock price movements using news sentiment.
+- Sentiment alone is not a strong predictor but can be combined with volatility, price trends and financial indicators for better accuracy.
+- Time-series forecasting showed limited impact from sentiment, but better feature engineering could improve results.
+- Ensemble techniques and deep learning models provide future avenues for improvement
+
 #### Next steps
 What suggestions do you have for next steps?
-- Enhance Feature Engineering
-- Refine Sentiment Analysis
-- Test Different Time Lags
-- Try More Advanced ML Models
+
+- Dataset enhancement - Get more stock values for a larger timeframe to enhance training
+- Enhance Feature Engineering - Include trading volume, earnings reports, and macroeconomic indicators.
+- Refine Sentiment Analysis - Test more advanced sentiment models. Use FinBERT or other financial-specific NLP models for better sentiment classification.
+- Expand Time-Series Analysis - Combine ARIMA/SARIMAX with machine learning models for hybrid forecasting.
+- Include more financial indicators - Including Trading Volume, Moving Averages, Bollinger Bands, Earnings Reports, Central Bank Announcements etc.
+- Create better lagged features - Capture delayed market reactions by shifting sentiment scores over multiple time frames (daily, weekly, monthly).
 
 #### Outline of project
 
