@@ -97,13 +97,10 @@ What suggestions do you have for next steps?
 - Create better lagged features - Capture delayed market reactions by shifting sentiment scores over multiple time frames (daily, weekly, monthly).
 
 
-###Conclusion
+### Conclusion
 
 The project explored predicting stock price movements using news sentiment analysis, applying machine learning (XGBoost, Random Forest, SVC) and time-series (ARIMA) models. Random Forest (68% accuracy) outperformed SVC (49%), showing moderate predictive power. XGBoost achieved the best results with high R² scores (~0.97) for traditional indices, while cryptocurrencies exhibited lower predictability. The XGBoost model with lag features showed mixed results, improving for stable indices but worsening for volatile assets. ARIMA performed the worst, with negative R² scores and high errors, proving ineffective for stock forecasting. Market volatility, not sentiment alone, was a key driver of price changes. The results suggest machine learning models are more reliable, but additional market indicators are needed for better accuracy. Future work should explore hybrid models combining ML and time-series approaches for improved forecasting.
 
 #### Outline of project
 
 - [Link to notebook 1](https://github.com/krupakmurthy/final_capstone/blob/main/capstone.ipynb)
-
-
-##### Contact and Further Information
