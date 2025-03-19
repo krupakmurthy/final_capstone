@@ -9,7 +9,7 @@ This analysis explores the relationship between news sentiment and stock market 
 #### Rationale
 Why should anyone care about this question?
 
-Stock prices don’t move in isolation—they react to news, sentiment, and public perception. Understanding how media sentiment influences the market can help investors, analysts, and policymakers make better decisions. If certain news patterns predict stock movements, traders can use this insight to anticipate market shifts.
+Stock prices don’t move in isolation - they react to news, sentiment, and public perception. Understanding how media sentiment influences the market can help investors, analysts, and policymakers make better decisions. If certain news patterns predict stock movements, traders can use this insight to anticipate market shifts.
 For long-term investors, knowing how sentiment affects volatility can help manage risk. And for businesses, this analysis can show how media narratives impact stock value, helping them navigate public relations and market expectations.
 In short, news moves markets, and this study helps us understand how
 
@@ -65,8 +65,7 @@ To understand how news sentiment impacts stock market movements, I followed a st
 
 - Model Evaluation
   - Evaluation Metrics: Accuracy, Mean Squared Error (MSE), Mean Absolute Error (MAE), R² Score.
-  - Cross-Validation: Applied k-fold cross-validation where applicable.
-  - Grid Search Hyperparameter Tuning: Optimized model parameters to improve accuracy.
+  - Cross-Validation: K-fold cross-validation is not ideal for predicting stock prices directly because it shuffles data randomly, which breaks the temporal order of stock market data. Since stock prices follow a time-series pattern, future prices depend on past values. k-fold cross validation is not used here. walk-forward CV could be used but the dataset was too small for this.
 
 #### Results
 What did your research find?
@@ -96,6 +95,11 @@ What suggestions do you have for next steps?
 - Expand Time-Series Analysis - Combine ARIMA/SARIMAX with machine learning models for hybrid forecasting.
 - Include more financial indicators - Including Trading Volume, Moving Averages, Bollinger Bands, Earnings Reports, Central Bank Announcements etc.
 - Create better lagged features - Capture delayed market reactions by shifting sentiment scores over multiple time frames (daily, weekly, monthly).
+
+
+###Conclusion
+
+The project explored predicting stock price movements using news sentiment analysis, applying machine learning (XGBoost, Random Forest, SVC) and time-series (ARIMA) models. Random Forest (68% accuracy) outperformed SVC (49%), showing moderate predictive power. XGBoost achieved the best results with high R² scores (~0.97) for traditional indices, while cryptocurrencies exhibited lower predictability. The XGBoost model with lag features showed mixed results, improving for stable indices but worsening for volatile assets. ARIMA performed the worst, with negative R² scores and high errors, proving ineffective for stock forecasting. Market volatility, not sentiment alone, was a key driver of price changes. The results suggest machine learning models are more reliable, but additional market indicators are needed for better accuracy. Future work should explore hybrid models combining ML and time-series approaches for improved forecasting.
 
 #### Outline of project
 
